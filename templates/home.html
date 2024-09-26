@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Landing Page</title>
+    <link rel="stylesheet" href="{% static 'css/homeStyle.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to WeatherApp</h1>
+    </header>
+
+    <main>
+        <div class="content-container">
+            <!-- Weather info section -->
+            <section class="weather-info">
+                <h2>Today's Weather</h2>
+                <div class="weather-details">
+                    <p><strong>City:</strong> <span id="city">{{ data.city }}</span></p>
+                    <p><strong>Temperature:</strong> <span id="temperature">{{ data.temperature }}°C</span></p>
+                    <p><strong>Condition:</strong> <span id="condition">{{ data.condition }}</span></p>
+                </div>
+            </section>
+
+            <!-- Form section -->
+            <section class="comment-form">
+                <h2>Leave a Comment</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment">Comment on weather:</label>
+                        <textarea id="comment" name="comment" rows="4" required></textarea>
+                    </div>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+
+            <!-- Comments section -->
+        </div>
+    </main>
+    <section class="user-comments">
+        <h2>Latest Comments</h2>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <p><strong>Name:</strong> {{ comment.name }}</p>
+                    <p><strong>Email:</strong> {{ comment.email }}</p>
+                    <p><strong>Comment:</strong> {{ comment.comment }}</p>
+                </li>
+            {% empty %}
+                <li>No comments yet. Be the first to comment!</li>
+            {% endfor %}
+        </ul>
+        <button type="submit" class="add_margin" onclick="parent.location.href='/comments/'">More</button>
+        
+    </section>
+
+    <footer>
+        <p>Contact us: yashpardhi4435@gmail.com | Phone: +91 9021043882</p>
+    </footer>
+</body>
+</html>

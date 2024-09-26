@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/homeStyle.css' %}">
+
+    <title>Document</title>
+</head>
+<body>
+<div class="myContainer">
+    <section class="user-comments">
+        <h2>Latest Comments</h2>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <p><strong>Name:</strong> {{ comment.name }}</p>
+                    <p><strong>Email:</strong> {{ comment.email }}</p>
+                    <p><strong>Comment:</strong> {{ comment.comment }}</p>
+                </li>
+            {% empty %}
+                <li>No comments yet. Be the first to comment!</li>
+            {% endfor %}
+        </ul>
+        
+    </section>
+</div>
+</body>
+</html>
